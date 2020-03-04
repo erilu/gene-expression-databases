@@ -16,10 +16,46 @@ output:
 
 ## Single-cell gene expression
 
-# Tumor expression Databases
 
-## TCGA expression
+## Human tumor expression databases
 
-## TCGA survival associations
+### firebrowse.org: TCGA expression data across indications, tumor vs normal
+
+http://firebrowse.org/ is a webpage created by the BROAD Institute that allows users to view the expression level of a gene of interest across all the indications within TCGA. For example, if I am interested in GPR183, I would input this into the search bar and the following result will be displayed:
+
+
+As we can see, each cancer indication is listed on the x-axis, and the expression of the gene is listed on the y-axis. For each indication, the expression of the gene within the tumor tissue samples (red) as well as the expression within the adjacent normal tissue samples (blue) are plotted. The indications are by default alphabetically sorted, but we can also sort the indications based on expression level, as such:
+
+
+This is a useful way to quickly identify indications that have high expression of your gene, as well as identify indications in which the gene is enriched in tumor tissue compared to the adjacent normal tissue.
+
+### TCGA survival associations
+
+There are multiple websites out there that are useful for analyzing survival associations within TCGA data. Below are three that I have found useful:
+
+#### oncolnc.org: cox regression
+
+At http://www.oncolnc.org, we can input our gene of interest and it will perform a cox regression analysis on all the indications within TCGA. For example, inputting GPR183 results in the following output, sorted by cox coefficient:
+
+http://www.oncolnc.org/search_results/?q=gpr183
+
+This tells us which cancers are likely to have a positive or negative association with survival. To further determine the survival associations are significant, we need to perform a split in which we determine which tumors have "high" or "low" expression. By pressing the "Plot Kaplan" button, and then performing a simple median split (entering 50:50) into the resulting webpage, we observe that SKCM has a clear survival association in which patients with higher GPR183 on average have higher survival than patietns with lower GPR183. The P-value is also quite small at 0.00817.
+
+#### Gepia2
+
+A more complex tool that allows for more customization than the above is Gepia2, at http://gepia2.cancer-pku.cn/#index. This web tool has many different functionalities. 
+
+To perform a survival analysis, navigate to the survival tab: http://gepia2.cancer-pku.cn/#survival. Then, input the gene of interest, and select the indications you would like to perform the analysis on. You can also customize the type of split, error bars, etc. This tool is a bit more versatile than the tool at oncolnc.org.
+
+This website also lets you export lists of top correlated genes. For example, the genes that are most correlated with GPR183 expression in X are X:
+
+
+
+#### PROGGENE
+
+Aside from TCGA, there are a vast number of gene expression studies associated with clinical data that are published in stand-alone journal articles. For example, https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE42568 provides gene expression information associated with 104 breast cancer biopsies, which can be associated with the survival outcomes from the patients from which the biopsies were taken.
+
+The web tool at http://genomics.jefferson.edu/proggene/ contains a compilation of a large number of these studies (as well as TCGA). Using this tool, we can input a signature 
+
 
 # Conclusion
