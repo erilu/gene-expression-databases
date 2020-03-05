@@ -10,11 +10,41 @@ output:
 
 # Tissue Expression Databases
 
-## Human gene expression
+#### Biogps
 
-## Mouse gene expression
+For human tissue-level and cell type-level expression, http://biogps.org/ is a great place to start. Entering the name of your gene in the search box:
 
-## Single-cell gene expression
+should show results for the different species available within biopgps:
+
+Selecting the species you are interested in will show the gene expression patterns for the GeneAtlas U133A, gcrma by default. We can change the dataset by clicking on the change dataset button in the top right of the center panel:
+
+I typically check Default Datasets -> Primary Cell Atlas.
+
+This provides a nice overview of the cell types that have expression of your gene of interest.
+
+#### GTEX
+
+Another database that gives tissue-level expression (i.e. which organs have high/low expression of your gene) is the gTEX Portal: https://gtexportal.org/home/. Simply type in the name of the gene and a plot will show up showing overall expression of the gene in various whole tissue / organs.
+
+#### Human protein atlas
+
+The human protein atlas contains a huge immunohistochemistry database, in which healthy tissues as well as tumor-bearing tissues have been stained for proteins of interest. Searching for your protein of interest shows the relative expression of the protein across different tissues of the body. Clicking on the tissue will show the actual immunohistochemistry images, so that you can assess whether the staining looks on-target or off-target, as well as determine what the spatial expression pattern of your protein is. This tool is great for comparing the results from the other gene expression databases with. We would expect taht the same tissues where we see high gene expression should also have high expression at the protein level.
+
+The human protein atlas also has a cell line atlas, in which it has profiled by RNA-seq many cancer cell lines. It categorizes the cell lines based on tissue of origin, and allows you to search for the expression level of your gene of interest:
+
+This is useful when you are interested in using cell line models for your project, and need to select a line that is positive or negative for your gene of interest.
+
+#### cell line atlas
+
+#### cancer cell line encyclopedia: https://portals.broadinstitute.org/ccle/about
+
+## Mouse gene expression: immgen
+
+### 3. Single-cell gene expression database
+
+#### EBI sc database: https://www.ebi.ac.uk/gxa/sc/home
+
+#### broad institute sc database: https://singlecell.broadinstitute.org/single_cell
 
 
 ## Human tumor expression databases
