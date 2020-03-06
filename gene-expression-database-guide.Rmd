@@ -6,11 +6,11 @@ output:
     toc: true
 ---
 
-# Introduction
-
 # Tissue Expression Databases
 
-#### Biogps
+In biomedical science, one of the most commonly asked questions is: where is a gene expressed? In what tissues, and in what cell types? This information is critical when assessing the probability that therapeutics that target a specific protein or pathway will have undesireable or off-target effects. Luckily, several publicly available databases can be used determine the overall expression pattern for a gene of interest. Here, I list some databases that I have found to be useful.
+
+## biogps.com
 
 For human tissue-level and cell type-level expression, http://biogps.org/ is a great place to start. Entering the name of your gene in the search box:
 
@@ -22,11 +22,11 @@ I typically check Default Datasets -> Primary Cell Atlas.
 
 This provides a nice overview of the cell types that have expression of your gene of interest.
 
-#### GTEX
+## gtexportal.org
 
 Another database that gives tissue-level expression (i.e. which organs have high/low expression of your gene) is the gTEX Portal: https://gtexportal.org/home/. Simply type in the name of the gene and a plot will show up showing overall expression of the gene in various whole tissue / organs.
 
-#### Human protein atlas
+## proteinatlas.org
 
 The human protein atlas contains a huge immunohistochemistry database, in which healthy tissues as well as tumor-bearing tissues have been stained for proteins of interest. Searching for your protein of interest shows the relative expression of the protein across different tissues of the body. Clicking on the tissue will show the actual immunohistochemistry images, so that you can assess whether the staining looks on-target or off-target, as well as determine what the spatial expression pattern of your protein is. This tool is great for comparing the results from the other gene expression databases with. We would expect taht the same tissues where we see high gene expression should also have high expression at the protein level.
 
@@ -34,23 +34,27 @@ The human protein atlas also has a cell line atlas, in which it has profiled by 
 
 This is useful when you are interested in using cell line models for your project, and need to select a line that is positive or negative for your gene of interest.
 
-#### cell line atlas
+## cancer cell line encyclopedia: https://portals.broadinstitute.org/ccle/about
 
-#### cancer cell line encyclopedia: https://portals.broadinstitute.org/ccle/about
+## immgen.org
 
-## Mouse gene expression: immgen
+Immgen is a great database for exploring expression of genes in mouse tissues and cell lines. This website has both a microarray database of sorted cell types as well as an RNA-seq database of sorted cell types. The main focus is on immunology-associated cell subsets.
 
-### 3. Single-cell gene expression database
+## 3. Single-cell gene expression databases
 
-#### EBI sc database: https://www.ebi.ac.uk/gxa/sc/home
+There are a few good single-cell RNA-seq databases. Single cell RNA-seq is useful for determining the expression of a gene within a very heterogenous mixture of cells. This is particularly useful for determining the specificity of a gene of interest for a cell type that you wish to target.
 
-#### broad institute sc database: https://singlecell.broadinstitute.org/single_cell
+### EBI sc database: https://www.ebi.ac.uk/gxa/sc/home
 
+### broad institute sc database: https://singlecell.broadinstitute.org/single_cell
 
-## Human tumor expression databases
+# Human tumor expression databases
 
-### firebrowse.org: TCGA expression data across indications, tumor vs normal
+In oncology, we also may be interested in how expression levels of a protein within tumors correlate with patient survival. There are databases available to assess these correlations as well.
 
+## firebrowse.org
+
+TCGA expression data across indications, tumor vs normal
 http://firebrowse.org/ is a webpage created by the BROAD Institute that allows users to view the expression level of a gene of interest across all the indications within TCGA. For example, if I am interested in GPR183, I would input this into the search bar and the following result will be displayed:
 
 
@@ -63,8 +67,9 @@ This is a useful way to quickly identify indications that have high expression o
 
 There are multiple websites out there that are useful for analyzing survival associations within TCGA data. Below are three that I have found useful:
 
-#### oncolnc.org: cox regression
+### oncolnc.org
 
+cox regression tool
 At http://www.oncolnc.org, we can input our gene of interest and it will perform a cox regression analysis on all the indications within TCGA. For example, inputting GPR183 results in the following output, sorted by cox coefficient:
 
 http://www.oncolnc.org/search_results/?q=gpr183
@@ -79,13 +84,12 @@ To perform a survival analysis, navigate to the survival tab: http://gepia2.canc
 
 This website also lets you export lists of top correlated genes. For example, the genes that are most correlated with GPR183 expression in X are X:
 
-
-
 #### PROGGENE
 
 Aside from TCGA, there are a vast number of gene expression studies associated with clinical data that are published in stand-alone journal articles. For example, https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE42568 provides gene expression information associated with 104 breast cancer biopsies, which can be associated with the survival outcomes from the patients from which the biopsies were taken.
 
 The web tool at http://genomics.jefferson.edu/proggene/ contains a compilation of a large number of these studies (as well as TCGA). Using this tool, we can input a signature 
 
-
 # Conclusion
+
+Given that the gene expresion information is collected by different scientists across the world, using different experimental techniques (Microarray, RNA-seq, etc.), it is important to compare and contrast the information provided by multiple databases. If we observe corroborating evidence from multiple databases, we can be more confident about making conclusions about the gene's expression patterns. Ultimately, the results obtained from these databases should be cross-referenced with publications on the gene.
