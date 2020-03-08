@@ -84,11 +84,22 @@ To perform a survival analysis, navigate to the survival tab: http://gepia2.canc
 
 This website also lets you export lists of top correlated genes. For example, the genes that are most correlated with GPR183 expression in X are X:
 
+
 #### PROGGENE
 
 Aside from TCGA, there are a vast number of gene expression studies associated with clinical data that are published in stand-alone journal articles. For example, https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE42568 provides gene expression information associated with 104 breast cancer biopsies, which can be associated with the survival outcomes from the patients from which the biopsies were taken.
 
-The web tool at http://genomics.jefferson.edu/proggene/ contains a compilation of a large number of these studies (as well as TCGA). Using this tool, we can input a signature 
+The web tool at http://genomics.jefferson.edu/proggene/ contains a compilation of a large number of these studies (as well as TCGA). Using this tool, we can input a signature composed of multiple genes as well. This will compute an average expression value using the aggregate expression of all the genes entered, and then assess survival based on your splitting criteria. This feature is nice if you are looking at things such as t cell exhaustion, which is a phenotypic state composed of multiple genes.
+
+### Downloading TCGA data
+
+analyzing the raw TCGA data: short guide - http://www.omnesres.com/tools/tcga/
+
+The raw TCGA data can be obtained from http://gdac.broadinstitute.org/. 
+
+Raw data for TCGA can also be obtained at
+
+https://xenabrowser.net/
 
 # Conclusion
 
