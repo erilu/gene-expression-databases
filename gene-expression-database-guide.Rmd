@@ -1,30 +1,44 @@
 ---
-title: "Gene expression database guide"
+title: "Publicly available gene expression databases"
 author: Erick Lu
 output:
   html_document:
     toc: true
 ---
 
-# Tissue Expression Databases
+# Gene Expression Databases
 
-In biomedical science, one of the most commonly asked questions is: where is a gene expressed? In what tissues, and in what cell types? This information is critical when assessing the probability that therapeutics that target a specific protein or pathway will have undesireable or off-target effects. Luckily, several publicly available databases can be used determine the overall expression pattern for a gene of interest. Here, I list some databases that I have found to be useful.
+When learning about a gene for the first time, we usually start off by asking questions about its expression pattern, such as:
+
+* What tissues in the body express the gene?
+* Within these tissues, which cell types express the gene?
+* Is expression of this gene correlated with disease burden or survival?
+
+This type of information has many uses, from determining cell type-specific gene signatures to assessing whether drugs that target a specific protein will have undesirable off-target effects. Luckily, several publicly-available databases can be used determine the overall expression pattern for a gene of interest, which I will describe in this guide.
 
 ## biogps.com
 
-For human tissue-level and cell type-level expression, http://biogps.org/ is a great place to start. Entering the name of your gene in the search box:
+For human tissue-level and cell type expression, http://biogps.org/ is a great place to start. Entering the name of your gene in the search box should show results for the different species available within biopgps. As an example, I search for GPR183:
 
-should show results for the different species available within biopgps:
+[Image]
 
-Selecting the species you are interested in will show the gene expression patterns for the GeneAtlas U133A, gcrma by default. We can change the dataset by clicking on the change dataset button in the top right of the center panel:
+Selecting the species you are interested in will show the gene expression patterns for the GeneAtlas U133A, gcrma by default: 
 
-I typically check Default Datasets -> Primary Cell Atlas.
+[Image]
+
+As you can see, a mixture of tissues as well as cell types are displayed. To observe expression in a different set of samples, we can change the dataset by clicking on the `change dataset` button in the top right of the center panel. I typically click on `Default Datasets` and then on `Primary Cell Atlas`:
+
+[Image]
 
 This provides a nice overview of the cell types that have expression of your gene of interest.
 
 ## gtexportal.org
 
-Another database that gives tissue-level expression (i.e. which organs have high/low expression of your gene) is the gTEX Portal: https://gtexportal.org/home/. Simply type in the name of the gene and a plot will show up showing overall expression of the gene in various whole tissue / organs.
+Another database that gives tissue-level expression is the gTEX Portal: https://gtexportal.org/home/. Simply type in the name of the gene and a plot will show up showing overall expression of the gene in various whole tissue / organs:
+
+[Image]
+
+This plot is useful for determining which tissues one might use as a positive expression control for assays such as qPCR or IHC.
 
 ## proteinatlas.org
 
@@ -34,15 +48,25 @@ The human protein atlas also has a cell line atlas, in which it has profiled by 
 
 This is useful when you are interested in using cell line models for your project, and need to select a line that is positive or negative for your gene of interest.
 
-## cancer cell line encyclopedia: https://portals.broadinstitute.org/ccle/about
-
 ## immgen.org
 
-Immgen is a great database for exploring expression of genes in mouse tissues and cell lines. This website has both a microarray database of sorted cell types as well as an RNA-seq database of sorted cell types. The main focus is on immunology-associated cell subsets.
+Immgen is a great database for exploring expression of genes in mouse tissues and cell lines. This website has both a microarray database of sorted cell types as well as an RNA-seq database of sorted cell types. The main focus is on immunology-associated cell subsets. 
+
+[Image]
+
+The RNA-seq portal provides the same data, but on more cell types and using a more sensitive gene expression assessment:
+
+[Image]:
+
+We can also plug in a gene signature of interest and see which cell types express the highest amounts of each gene in the set:
+
+[Image]
+
+What is nice about this website is that it provides the flow cytometry gating strategy and purity for each of the sorted cell subsets.
 
 ## 3. Single-cell gene expression databases
 
-There are a few good single-cell RNA-seq databases. Single cell RNA-seq is useful for determining the expression of a gene within a very heterogenous mixture of cells. This is particularly useful for determining the specificity of a gene of interest for a cell type that you wish to target.
+There are a few good single-cell RNA-seq databases. Single cell RNA-seq is useful for determining the expression of a gene within a very heterogenous mixture of cells. This is particularly useful for determining the specificity of a gene of interest for a cell type that you wish to target, and for generating cell-type specific gene signatures. 
 
 ### EBI sc database: https://www.ebi.ac.uk/gxa/sc/home
 
