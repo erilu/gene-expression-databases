@@ -14,9 +14,9 @@ When learning about a gene for the first time, we usually start off by asking qu
 * Within these tissues, which cell types express the gene?
 * Is expression of this gene correlated with disease burden or survival?
 
-This type of information has many uses, from determining cell type-specific gene signatures to assessing whether drugs that target a specific protein will have undesirable off-target effects. Luckily, several publicly-available databases can be used determine the overall expression pattern for a gene of interest, which I will describe in this guide.
+This type of information has many uses, from determining cell type-specific gene signatures to assessing whether drugs that target a specific protein will have undesirable off-target effects. Luckily, several publicly-available databases can be used determine the overall expression pattern for a gene of interest. I will describe the databses that I have found most useful in this guide.
 
-## biogps.com
+## biogps.org
 
 For human tissue-level and cell type expression, http://biogps.org/ is a great place to start. Entering the name of your gene in the search box should show results for the different species available within biopgps. As an example, I search for GPR183:
 
@@ -42,35 +42,66 @@ This plot is useful for determining which tissues one might use as a positive ex
 
 ## proteinatlas.org
 
-The human protein atlas contains a huge immunohistochemistry database, in which healthy tissues as well as tumor-bearing tissues have been stained for proteins of interest. Searching for your protein of interest shows the relative expression of the protein across different tissues of the body. Clicking on the tissue will show the actual immunohistochemistry images, so that you can assess whether the staining looks on-target or off-target, as well as determine what the spatial expression pattern of your protein is. This tool is great for comparing the results from the other gene expression databases with. We would expect taht the same tissues where we see high gene expression should also have high expression at the protein level.
+The Human Protein Atlas (https://www.proteinatlas.org/) is an immunohistochemistry database which displays the expression of a protein in both healthy tissues as well as tumor-bearing tissues. In addition to showing the relative expression of the protein across different tissues in the body, clicking on a tissue type will display the raw immunohistochemistry images, so that you can observe the spatial expression pattern of your protein as well as assess whether the staining looks on-target. This tool is great for validating results from the gene expression databases. We would expect that the tissues with high gene expression should also have high expression at the protein level. As an example, I search for P2RY8 below:
 
-The human protein atlas also has a cell line atlas, in which it has profiled by RNA-seq many cancer cell lines. It categorizes the cell lines based on tissue of origin, and allows you to search for the expression level of your gene of interest:
+[Image]
 
-This is useful when you are interested in using cell line models for your project, and need to select a line that is positive or negative for your gene of interest.
+This website also has a cancer cell line database, in which 64 cancer cell lines originating from various tissues have been characterized by RNA-seq. It categorizes the cell lines based on tissue of origin and allows you to search for the expression level of your gene of interest.
+
+[Image]
+
+This is useful when you are interested in using cell line models for your project, and need to select a line that is positive or negative for your gene of interest. The raw RNA-seq data for the cell lines can be downloaded from: https://www.proteinatlas.org/about/download.
 
 ## immgen.org
 
-Immgen is a great database for exploring expression of genes in mouse tissues and cell lines. This website has both a microarray database of sorted cell types as well as an RNA-seq database of sorted cell types. The main focus is on immunology-associated cell subsets. 
+http://www.immgen.org/ is a great database for exploring expression of genes in mouse immune cell subsets. Clicking on the `Data Browsers` button will show you the tools available. I typically use the first tool, `Gene Skyline`. Here, immune cell subsets were isolated using FACS and their gene expression profiles were assessed using either RNA-seq or microarray. Searching for your gene of interest in the microarray database shows the relative expression level of the gene across all the individual populations:
 
 [Image]
 
-The RNA-seq portal provides the same data, but on more cell types and using a more sensitive gene expression assessment:
-
-[Image]:
-
-We can also plug in a gene signature of interest and see which cell types express the highest amounts of each gene in the set:
+The RNA-seq portal provides similar data, but on more cell types. RNA-seq is typically a more robust method of assessing gene expression.
 
 [Image]
 
-What is nice about this website is that it provides the flow cytometry gating strategy and purity for each of the sorted cell subsets.
+What is nice about this website is that clicking on the cell subset will display the flow cytometry gating strategy and purity:
+
+[Image]
+
+Another useful tool on the website is `MyGeneset`. This tool allows you to plug in a gene signature of interest and see which cell types express the highest amounts of each gene in the set:
+
+[Image]
+
 
 ## 3. Single-cell gene expression databases
 
-There are a few good single-cell RNA-seq databases. Single cell RNA-seq is useful for determining the expression of a gene within a very heterogenous mixture of cells. This is particularly useful for determining the specificity of a gene of interest for a cell type that you wish to target, and for generating cell-type specific gene signatures. 
+Single-cell RNA-seq is useful for determining the expression of a gene within heterogenous mixtures of cells. This is particularly useful for determining the specificity of a gene of interest for a cell type that you wish to target, and for generating cell-type specific gene signatures. The cell populations are defined by their gene expression, rather than by sorting. This reduces the possibility of contaminating cells biasing the true gene expression pattern of a cell type of interest. There are a few good single-cell RNA-seq databases, including:
 
 ### EBI sc database: https://www.ebi.ac.uk/gxa/sc/home
 
+The Single Cell Expression Atlas at the EBI contains a repository of both mouse and human single-cell RNA-seq datasets. Searching the database takes some time.
+
+Scrolling through the results, you may find 
+
+[Image]
+
+Clicking on `Browse Experiments` shows you a list of the individual single-cell RNA-sequencing datasets available:
+
+[Image]
+
+Clicking again on a single experiment will load what is presumably a Seurat object, displaying a t-SNE plot as well as a gene overlay plot (FeaturePlot). You can then input your gene of interest and the expression should be overlaid on the plot on the right.
+
+[Image]
+
 ### broad institute sc database: https://singlecell.broadinstitute.org/single_cell
+
+A similar website that contains a repository of publicly available single-cell RNA-sequencing datasets is the Single Cell portal at the BROAD institute. Searching for your gene will show its expression across pre-defined cell subsets within each of the single-cell RNA-seq experiments, displayed as violin plots:
+
+[Image]
+
+Clicking on the dataset will again show the details, but this time the data seem to ahve been analyzed using a different software (likely Python). However, the functionality is the same. A scatterplot showing the cell clustering is displayed, and searching for the gene will overlay the expression values ontop of this plot. YOu can choose between the violin plot or scatterplot output:
+
+[Image]
+
+These two single cell websites are great for use in conjunction with the other bulk RNA-sequencing databases. Once you think you have an idea of the tissue and cell type expression pattern of your gene, it is good to cross-reference that information with tehse single cell datasets to determine how specifc the gene expression is and what other unknown cell types might also have expression of your gene that were not present in the other databases.
 
 # Human tumor expression databases
 
@@ -78,7 +109,6 @@ In oncology, we also may be interested in how expression levels of a protein wit
 
 ## firebrowse.org
 
-TCGA expression data across indications, tumor vs normal
 http://firebrowse.org/ is a webpage created by the BROAD Institute that allows users to view the expression level of a gene of interest across all the indications within TCGA. For example, if I am interested in GPR183, I would input this into the search bar and the following result will be displayed:
 
 
