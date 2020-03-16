@@ -1,10 +1,16 @@
 ---
 title: "Publicly available gene expression databases"
 author: Erick Lu
+date: "March 15, 2020  \n\n[GitHub Repo](https://github.com/erilu/gene-expression-databases)"
 output:
   html_document:
     toc: true
 ---
+
+```{r include=F}
+library(knitr)
+opts_chunk$set( out.width = "80%", fig.align="center")
+```
 
 # Gene Expression Databases
 
@@ -14,112 +20,151 @@ When learning about a gene for the first time, we usually start off by asking qu
 * Within these tissues, which cell types express the gene?
 * Is expression of this gene correlated with disease burden or survival?
 
-This type of information has many uses, from determining cell type-specific gene signatures to assessing whether drugs that target a specific protein will have undesirable off-target effects. Luckily, several publicly-available databases can be used determine the overall expression pattern for a gene of interest. I will describe the databses that I have found most useful in this guide.
+This type of information has many uses, from determining cell type-specific gene signatures to assessing whether drugs that target a specific protein will have undesirable off-target effects. Luckily, several publicly-available databases can be used determine the overall expression pattern for a gene of interest. In this guide, I will describe the databses that I have found most useful.
 
 ## biogps.org
 
-For human tissue-level and cell type expression, http://biogps.org/ is a great place to start. Entering the name of your gene in the search box should show results for the different species available within biopgps. As an example, I search for GPR183:
+For human tissue-level and cell type expression, http://biogps.org/ is a great place to start. Entering the name of your gene in the search box should show results for the different species available within biopgps. As an example, I search for P2RY8, a G-protein coupled receptor that I studied in my PhD.
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
-Selecting the species you are interested in will show the gene expression patterns for the GeneAtlas U133A, gcrma by default: 
+This provides a nice overview of the cell types that have expression of your gene of interest. We observe that P2RY8 is expressed in many different immune cell types, including B cells, T cells, and NK cells. It appears to have low expression in stromal cells such as fibroblasts and epithelial cells.
 
-[Image]
+We are currently looking at data from the `Primary Cell Atlas` dataset. Biogps has several different datasets to choose from. We can change the dataset by clicking on the `change dataset` button in the top right of the center panel:
 
-As you can see, a mixture of tissues as well as cell types are displayed. To observe expression in a different set of samples, we can change the dataset by clicking on the `change dataset` button in the top right of the center panel. I typically click on `Default Datasets` and then on `Primary Cell Atlas`:
+```{r echo = F}
+include_graphics("images/")
+```
 
-[Image]
+This other dataset, `Barcode on normal tissues`, displays expression of your gene across a set of tissues and sorted cell types. This is useful for determining which tissues one might use as a positive expression control for assays such as qPCR or IHC.
 
-This provides a nice overview of the cell types that have expression of your gene of interest.
+```{r echo = F}
+include_graphics("images/")
+```
+
+We observe that spleen, bone marrow, and tonsil have high expression of P2RY8, and may be good sources for positive expression control tissues.
 
 ## gtexportal.org
 
 Another database that gives tissue-level expression is the gTEX Portal: https://gtexportal.org/home/. Simply type in the name of the gene and a plot will show up showing overall expression of the gene in various whole tissue / organs:
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
-This plot is useful for determining which tissues one might use as a positive expression control for assays such as qPCR or IHC.
+Using this website in conjunction with Biogps allows us to be more confident in assessing the expression pattern of our gene in tissues.
 
 ## proteinatlas.org
 
-The Human Protein Atlas (https://www.proteinatlas.org/) is an immunohistochemistry database which displays the expression of a protein in both healthy tissues as well as tumor-bearing tissues. In addition to showing the relative expression of the protein across different tissues in the body, clicking on a tissue type will display the raw immunohistochemistry images, so that you can observe the spatial expression pattern of your protein as well as assess whether the staining looks on-target. This tool is great for validating results from the gene expression databases. We would expect that the tissues with high gene expression should also have high expression at the protein level. As an example, I search for P2RY8 below:
+The Human Protein Atlas (https://www.proteinatlas.org/) is an immunohistochemistry database which displays the expression of a protein in both healthy tissues as well as tumor-bearing tissues. In addition to showing the relative expression of the protein across different tissues in the body, clicking on a tissue type will display the raw immunohistochemistry (IHC) images, so that you can observe the spatial expression pattern of your protein as well as assess whether the staining looks on-target. This tool is great for validating results from the gene expression databases. We would expect that the tissues with high gene expression should also have high expression at the protein level. As an example, I search for P2RY8 below:
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
+
+We can examine the raw IHC images by clicking on the `Tissue` tab. Within this tab, you can click through the tissues to observe what the staining looks like. As an example, here are the staining results in tonsil tissue:
+
+```{r echo = F}
+include_graphics("images/")
+```
+
+We observe that the majority of the staining lies in the germinal centers of the tonsil, suggesting that these sites contain cells that have high expression of P2RY8. This makes sense based on the gene expression data from Biogps and gTEX.
 
 This website also has a cancer cell line database, in which 64 cancer cell lines originating from various tissues have been characterized by RNA-seq. It categorizes the cell lines based on tissue of origin and allows you to search for the expression level of your gene of interest.
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
 This is useful when you are interested in using cell line models for your project, and need to select a line that is positive or negative for your gene of interest. The raw RNA-seq data for the cell lines can be downloaded from: https://www.proteinatlas.org/about/download.
 
 ## immgen.org
 
-http://www.immgen.org/ is a great database for exploring expression of genes in mouse immune cell subsets. Clicking on the `Data Browsers` button will show you the tools available. I typically use the first tool, `Gene Skyline`. Here, immune cell subsets were isolated using FACS and their gene expression profiles were assessed using either RNA-seq or microarray. Searching for your gene of interest in the microarray database shows the relative expression level of the gene across all the individual populations:
+http://www.immgen.org/ is a great database for exploring expression of genes in mouse immune cell subsets. Clicking on the `Data Browsers` button will show you the tools available. I typically use the first tool, `Gene Skyline`. Here, immune cell subsets were isolated using FACS and their gene expression profiles were assessed using either RNA-seq or microarray. Searching for your gene of interest in the microarray database shows the relative expression level of the gene across all the individual populations. Since there is no mouse orthologue for P2RY8, I will search instead for GPR183, another G-protein coupled receptor I worked on before:
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
 The RNA-seq portal provides similar data, but on more cell types. RNA-seq is typically a more robust method of assessing gene expression.
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
 What is nice about this website is that clicking on the cell subset will display the flow cytometry gating strategy and purity:
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
 Another useful tool on the website is `MyGeneset`. This tool allows you to plug in a gene signature of interest and see which cell types express the highest amounts of each gene in the set:
 
-[Image]
-
+```{r echo = F}
+include_graphics("images/")
+```
 
 ## 3. Single-cell gene expression databases
 
 Single-cell RNA-seq is useful for determining the expression of a gene within heterogenous mixtures of cells. This is particularly useful for determining the specificity of a gene of interest for a cell type that you wish to target, and for generating cell-type specific gene signatures. The cell populations are defined by their gene expression, rather than by sorting. This reduces the possibility of contaminating cells biasing the true gene expression pattern of a cell type of interest. There are a few good single-cell RNA-seq databases, including:
 
-### EBI sc database: https://www.ebi.ac.uk/gxa/sc/home
+### EBI Single Cell Expression Atlas
 
-The Single Cell Expression Atlas at the EBI contains a repository of both mouse and human single-cell RNA-seq datasets. Searching the database takes some time.
+The Single Cell Expression Atlas at the EBI (https://www.ebi.ac.uk/gxa/sc/home) contains a repository of both mouse and human single-cell RNA-seq datasets. Searching the database takes some time.
 
 Scrolling through the results, you may find 
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
 Clicking on `Browse Experiments` shows you a list of the individual single-cell RNA-sequencing datasets available:
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
 Clicking again on a single experiment will load what is presumably a Seurat object, displaying a t-SNE plot as well as a gene overlay plot (FeaturePlot). You can then input your gene of interest and the expression should be overlaid on the plot on the right.
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
-### broad institute sc database: https://singlecell.broadinstitute.org/single_cell
+### BROAD Single Cell Portal
 
-A similar website that contains a repository of publicly available single-cell RNA-sequencing datasets is the Single Cell portal at the BROAD institute. Searching for your gene will show its expression across pre-defined cell subsets within each of the single-cell RNA-seq experiments, displayed as violin plots:
+A similar website is the Single Cell portal at the BROAD institute (https://singlecell.broadinstitute.org/single_cell), which also contains a repository of publicly available single-cell RNA-sequencing datasets. Searching for your gene will show its expression across pre-defined cell subsets within each of the single-cell RNA-seq experiments, displayed as violin plots:
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
-Clicking on the dataset will again show the details, but this time the data seem to ahve been analyzed using a different software (likely Python). However, the functionality is the same. A scatterplot showing the cell clustering is displayed, and searching for the gene will overlay the expression values ontop of this plot. YOu can choose between the violin plot or scatterplot output:
+Clicking on the dataset will again show the details, but this time the data seem to ahve been analyzed using a different software (likely Python). However, the functionality is the same. A scatterplot showing the cell clustering is displayed, and searching for the gene will overlay the expression values ontop of this plot. You can choose between the violin plot or scatterplot output:
 
-[Image]
+```{r echo = F}
+include_graphics("images/")
+```
 
 These two single cell websites are great for use in conjunction with the other bulk RNA-sequencing databases. Once you think you have an idea of the tissue and cell type expression pattern of your gene, it is good to cross-reference that information with tehse single cell datasets to determine how specifc the gene expression is and what other unknown cell types might also have expression of your gene that were not present in the other databases.
 
+---
+
 # Human tumor expression databases
 
-In oncology, we also may be interested in how expression levels of a protein within tumors correlate with patient survival. There are databases available to assess these correlations as well.
+In oncology, we also may be interested in how expression levels of a protein within tumors correlate with patient survival. There are databases available to assess these correlations as well. There are multiple websites out there that are useful for analyzing survival associations within TCGA data. Below are three that I have found useful:
 
 ## firebrowse.org
 
 http://firebrowse.org/ is a webpage created by the BROAD Institute that allows users to view the expression level of a gene of interest across all the indications within TCGA. For example, if I am interested in GPR183, I would input this into the search bar and the following result will be displayed:
 
+```{r echo = F}
+include_graphics("images/")
+```
 
-As we can see, each cancer indication is listed on the x-axis, and the expression of the gene is listed on the y-axis. For each indication, the expression of the gene within the tumor tissue samples (red) as well as the expression within the adjacent normal tissue samples (blue) are plotted. The indications are by default alphabetically sorted, but we can also sort the indications based on expression level, as such:
-
+As we can see, each cancer indication is listed on the x-axis, and the expression of the gene is listed on the y-axis. For each indication, the expression of the gene within the tumor tissue samples (red) as well as the expression within the adjacent normal tissue samples (blue) are plotted. The indications are by default alphabetically sorted, but we can also sort the indications based on expression level.
 
 This is a useful way to quickly identify indications that have high expression of your gene, as well as identify indications in which the gene is enriched in tumor tissue compared to the adjacent normal tissue.
-
-### TCGA survival associations
-
-There are multiple websites out there that are useful for analyzing survival associations within TCGA data. Below are three that I have found useful:
 
 ### oncolnc.org
 
@@ -128,7 +173,15 @@ At http://www.oncolnc.org, we can input our gene of interest and it will perform
 
 http://www.oncolnc.org/search_results/?q=gpr183
 
-This tells us which cancers are likely to have a positive or negative association with survival. To further determine the survival associations are significant, we need to perform a split in which we determine which tumors have "high" or "low" expression. By pressing the "Plot Kaplan" button, and then performing a simple median split (entering 50:50) into the resulting webpage, we observe that SKCM has a clear survival association in which patients with higher GPR183 on average have higher survival than patietns with lower GPR183. The P-value is also quite small at 0.00817.
+```{r echo = F}
+include_graphics("images/")
+```
+
+This tells us which cancers are likely to have a positive or negative association with survival. To further determine the survival associations are significant, we need to perform a split in which we determine which tumors have "high" or "low" expression. By pressing the "Plot Kaplan" button, and then performing a simple median split (entering 50:50) into the resulting webpage, we observe that SKCM has a clear survival association in which patients with higher GPR183 on average have higher survival than patients with lower GPR183. The P-value is also quite small at 0.00817.
+
+```{r echo = F}
+include_graphics("images/")
+```
 
 #### Gepia2
 
@@ -136,24 +189,38 @@ A more complex tool that allows for more customization than the above is Gepia2,
 
 To perform a survival analysis, navigate to the survival tab: http://gepia2.cancer-pku.cn/#survival. Then, input the gene of interest, and select the indications you would like to perform the analysis on. You can also customize the type of split, error bars, etc. This tool is a bit more versatile than the tool at oncolnc.org.
 
+```{r echo = F}
+include_graphics("images/")
+```
+
 This website also lets you export lists of top correlated genes. For example, the genes that are most correlated with GPR183 expression in X are X:
 
+```{r echo = F}
+include_graphics("images/")
+```
 
 #### PROGGENE
 
 Aside from TCGA, there are a vast number of gene expression studies associated with clinical data that are published in stand-alone journal articles. For example, https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE42568 provides gene expression information associated with 104 breast cancer biopsies, which can be associated with the survival outcomes from the patients from which the biopsies were taken.
 
-The web tool at http://genomics.jefferson.edu/proggene/ contains a compilation of a large number of these studies (as well as TCGA). Using this tool, we can input a signature composed of multiple genes as well. This will compute an average expression value using the aggregate expression of all the genes entered, and then assess survival based on your splitting criteria. This feature is nice if you are looking at things such as t cell exhaustion, which is a phenotypic state composed of multiple genes.
+```{r echo = F}
+include_graphics("images/")
+```
+
+The web tool at http://genomics.jefferson.edu/proggene/ contains a compilation of a large number of these studies (as well as TCGA). Using this tool, we can input a signature composed of multiple genes as well. This will compute an average expression value using the aggregate expression of all the genes entered, and then assess survival based on your splitting criteria. This feature is nice if you are looking at things such as T cell exhaustion, which is a phenotypic state composed of multiple genes.
 
 ### Downloading TCGA data
 
-analyzing the raw TCGA data: short guide - http://www.omnesres.com/tools/tcga/
+If the above webtools don't provide the analysis you need, you can download the raw data for TCGA for your own purposes. 
 
 The raw TCGA data can be obtained from http://gdac.broadinstitute.org/. 
 
-Raw data for TCGA can also be obtained at
+Raw data for TCGA can also be obtained at the UCSC Xena browser (https://xena.ucsc.edu/public), which provides raw data for several large gene expression studies (TCGA, ICGC, GDC, etc.). I recommend selecting the 
 
-https://xenabrowser.net/
+A short guide about how to read the sample barcodes can be found here: http://www.omnesres.com/tools/tcga/.
+
+
+---
 
 # Conclusion
 
