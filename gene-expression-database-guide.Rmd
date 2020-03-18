@@ -1,7 +1,7 @@
 ---
 title: "Publicly available gene expression databases"
 author: Erick Lu
-date: "March 16, 2020  \n\n[GitHub Repo](https://github.com/erilu/gene-expression-databases)"
+date: "March 17, 2020  \n\n[GitHub Repo](https://github.com/erilu/gene-expression-databases)"
 output:
   html_document:
     toc: true
@@ -12,7 +12,7 @@ library(knitr)
 opts_chunk$set( out.width = "80%", fig.align="center")
 ```
 
-# Gene Expression Databases
+# Gene expression databases
 
 When learning about a gene for the first time, we usually start off by asking questions about its expression pattern, such as:
 
@@ -20,7 +20,7 @@ When learning about a gene for the first time, we usually start off by asking qu
 * Within these tissues, which cell types express the gene?
 * Is expression of this gene correlated with disease burden or survival?
 
-This type of information has many uses, from determining cell type-specific gene signatures to assessing whether drugs that target a specific protein will have undesirable off-target effects. Luckily, several publicly-available databases can be used determine the overall expression pattern for a gene of interest. In this guide, I will describe the databses that I have found most useful.
+This type of information has many uses, from determining cell type-specific gene signatures to assessing whether drugs that target a specific protein will have undesirable off-target effects. Luckily, several publicly available databases can be used to determine the overall expression pattern of a gene of interest. In this guide, I will describe how to use the databses that I have found most useful.
 
 ## biogps.org
 
@@ -88,7 +88,9 @@ http://www.immgen.org/ is a great database for exploring expression of genes in 
 include_graphics("images/immgen_gpr183_microarray.png")
 ```
 
-The RNA-seq portal provides similar data, but on more cell types. RNA-seq is typically a more robust method of assessing gene expression, but I would recommend searching your gene on both portals to see if the results match. What is nice about this website is that clicking on the cell subset will display the flow cytometry gating strategy and purity. For example, clicking on the "DC.8+.Sp" subset will open a PDF that displays how the cells were stained and gated:
+The RNA-seq portal provides similar data, but on more cell types. RNA-seq is typically a more robust method of assessing gene expression, but I would recommend searching your gene on both portals to see if the results match.
+
+Another nice thing about this website is that clicking on the cell subset will display the flow cytometry gating strategy and purity. For example, clicking on the "DC.8+.Sp" subset will open a PDF that displays how the cells were stained and gated:
 
 ```{r echo = F}
 include_graphics("images/immgen_sort_gating.png")
@@ -97,14 +99,15 @@ include_graphics("images/immgen_sort_gating.png")
 Another useful tool on the website is `MyGeneset`. This tool allows you to plug in a gene signature of interest and see which cell types express the highest amounts of each gene in the set:
 
 ```{r echo = F}
-include_graphics("images/immgen_mygeneset1.png")
-include_graphics("images/immgen_mygeneset2.png")
+include_graphics("images/immgen_mygeneset_settings.png")
+include_graphics("images/immgen_mygeneset_heatmap.png")
 ```
 
+In the example above, I input a set of genes specific to various different cell types. We can see that CD3e expression is restricted to T cells, CD19 expression is restricted to B cells, and Xcr1 expression is restricted to CD8+ dendritic cells, as expected. If you ever have a set of multiple genes that you want to quickly determine the expression pattern for, this is a great tool.
 
-## 3. Single-cell gene expression databases
+## Single-cell gene expression databases
 
-Single-cell RNA-seq is useful for determining the expression of a gene within heterogenous mixtures of cells. This is particularly useful for determining cell-type specific gene signatures. The cell populations in these datasets are defined by their gene expression patterns, rather than other databases which pre-define cell types using flow-cytometry panels and FACS. With single-cell RNA-seq, there is a lower possibility of contaminating cells biasing the true gene expression pattern of a cell type of interest. There are a couple good single-cell RNA-seq databases, including:
+Single-cell RNA-seq is useful for determining the expression of a gene within heterogenous mixtures of cells. This is particularly useful for determining cell-type specific gene signatures. The cell populations in these datasets are defined by their gene expression patterns, rather than other databases which pre-define cell types using flow-cytometry panels and FACS. With single-cell RNA-seq, there is a lower possibility of contaminating cells biasing the true gene expression pattern of a cell type of interest. There are a couple of good single-cell RNA-seq databases, which I will describe below.
 
 ### EBI Single Cell Expression Atlas
 
@@ -164,7 +167,7 @@ include_graphics("images/firebrowse_gpr183.png")
 
 As we can see, each cancer indication is listed on the x-axis, and the expression of the gene is listed on the y-axis. For each indication, the expression of the gene within the tumor tissue samples (red) as well as the expression within the adjacent normal tissue samples (blue) are plotted. The indications are by default alphabetically sorted, but we can also sort the indications based on expression level. This is a useful way to quickly identify indications that have high expression of your gene, as well as identify indications in which the gene is enriched in tumor tissue compared to the adjacent normal tissue. From the plot above, we observe that GPR183 is enriched in tumor tissue in kidney renal clear cell carcinoma (KIRC).
 
-### oncolnc.org
+## oncolnc.org
 
 In order to assess survival associations with gene expression, a Cox regression for survival analysis as well as a Kaplan Meier survival analysis can be performed. This requires matching each tumor within TCGA with its corresponding clinical data, which is tedious due to the messy nature of the data. Luckily, a webtool is available that will perform these calculations for us, at http://www.oncolnc.org. We can input our gene of interest and it will perform a cox regression analysis on all the indications within TCGA. For example, inputting GPR183 results in the following output, sorted by cox coefficient:
 
@@ -180,28 +183,39 @@ include_graphics("images/oncolnc_gpr183_skcm.png")
 
 We observe that SKCM has a clear survival association in which patients with higher GPR183 on average have higher survival than patients with lower GPR183. The P-value is also quite small at 0.00817.
 
-#### Gepia2
+## Gepia2
 
-Another survival analysis tool that allows for more customization than the above is Gepia2, at http://gepia2.cancer-pku.cn/#index. To perform a survival analysis, navigate to the survival tab: http://gepia2.cancer-pku.cn/#survival. Then, input the gene of interest, and select the indications you would like to perform the analysis on. You can also customize the type of split, error bars, etc. This tool is a bit more versatile than the tool at oncolnc.org. Below is the same 50:50 split on SKCM for GPR183, using Gepia2:
+Another survival analysis tool that allows for more customization than the above is Gepia2, at http://gepia2.cancer-pku.cn/#index. To perform a survival analysis, navigate to the survival tab: http://gepia2.cancer-pku.cn/#survival. Then, input the gene of interest, and select the indications you would like to perform the analysis on. You can also customize the type of split, error bars, etc, using the settings panel below. This tool is a bit more versatile than the tool at oncolnc.org.
 
 ```{r echo = F}
 include_graphics("images/gepia2_settings.png")
+```
+
+Below are resuts for the same 50:50 split on SKCM for GPR183 that we performed earlier, this time using Gepia2:
+
+```{r echo = F, out.width = "50%"}
 include_graphics("images/gepia2_results.png")
 ```
 
 This website also lets you search for genes that are most highly correlated with a given gene of interest, perform correlation analysis between two genes or gene sets, and calculate differential genes between tumor and normal tissue for selected indications. There is a whole panel of useful tools that you can browse through on the left sidebar.
 
-#### PROGGENE
+## PROGGENE
 
-Aside from TCGA, there are a vast number of stand-alone journal articles that have published gene expression studies associated with clinical data. For example, https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE42568 provides gene expression information associated with 104 breast cancer biopsies, which can be associated with the survival outcomes from the patients from which the biopsies were taken. The web tool at http://genomics.jefferson.edu/proggene/ contains a compilation of a large number of these studies (as well as TCGA data).
+Aside from TCGA, there are a vast number of stand-alone journal articles that have published gene expression studies associated with clinical data. For example, https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE42568 provides gene expression information associated with 104 breast cancer biopsies as well as survival outcomes from the patients from which the biopsies were taken. The PROGGENE web tool at http://genomics.jefferson.edu/proggene/ performs survival analysis for a large number of these stand-alone studies, as well as on TCGA data. The display panel below lets you input your gene, the indications you want to analyze, and the type of split (default split is median). 
 
 ```{r echo = F}
-#include_graphics("images/")
+include_graphics("images/proggene_settings.png")
+```
+
+After pressing submit, a list of the available studies that contain data for your gene will be displayed. Clicking on "Create Plots" will generate the Kaplan Meier curves for each dataset, that look like the one below:
+
+```{r echo = F}
+include_graphics("images/proggene_gpr183_output.png")
 ```
 
 Using this tool, we can input a signature composed of multiple genes as well. This will compute an average expression value using the aggregate expression of all the genes entered, and then assess survival based on your splitting criteria. This feature is nice if you are looking at things such as T cell exhaustion, which is a phenotypic state composed of multiple genes.
 
-### Downloading TCGA data
+## Downloading TCGA data
 
 If the above webtools don't provide the analysis you need, you can download the raw data for TCGA and perform your own analysis. The raw TCGA data can be obtained from http://gdac.broadinstitute.org/. The webpage will list all the indications, from which you can press the "Browse" link under the "Data" column to access the data download. The `illuminahiseq_rnaseqv2-RSEM_genes_normalized (MD5)` file contains the normalized expression data.
 
